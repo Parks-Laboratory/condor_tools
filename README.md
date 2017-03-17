@@ -1,20 +1,20 @@
 # Description
 Tools for making portable installations, monitoring jobs, and in general interacting with CHTC condor
 
-## Condor CLI: 
+## Condor CLI:
 (see http://research.cs.wisc.edu/htcondor/manual/current/11_Command_Reference.html)
 
-condor_q
-	View user's jobs in the queue
-	Options:
-		-hold
-			View jobs being held, and the reason why they are on hold
-condor_release $USER
-	Restart all jobs for $USER that were put on hold
-condor_rm [<job #> | $USER]
-	if $USER is specified instead of job#, all jobs submitted by user are removed
-condor_submit <submit file>.sub
-codor_submit -i <interactive submit file>.sub
+	condor_q
+		View user's jobs in the queue
+		Options:
+			-hold
+				View jobs being held, and the reason why they are on hold
+	condor_release $USER
+		Restart all jobs for $USER that were put on hold
+	condor_rm [<job #> | $USER]
+		if $USER is specified instead of job#, all jobs submitted by user are removed
+	condor_submit <submit file>.sub
+	codor_submit -i <interactive submit file>.sub
 
 ## Condor log files codes:
 	000: Job submitted
