@@ -1,0 +1,33 @@
+Problem:
+	Most nodes receive the files that are supposed to be transferred,
+	but some nodes fails to receive them. A node always fails to receive a file
+	when several jobs are submitted to the node at the same time.
+
+Solution:
+	Enable re-submission of held jobs by adding the following line to .sub file:
+		periodic_release = (CurrentTime - EnteredCurrentStatus > 600)
+
+Error message:
+	012 (82636528.099.000) 03/17 12:22:07 Job was held.
+	        Error from slot1_9@e151.chtc.wisc.edu: STARTER at 128.105.244.20 failed to receive file /var/lib/condor/execute/slot1/dir_7053/epistasis.tar.gz: FILETRANSFER:1:non-zero exit(1792) from /usr/libexec/condor/curl_plugin
+	        Code 12 Subcode 0
+
+Held jobs: (note that they are submitted to machine e151.chtc.wisc.edu at 12:22pm)
+	82636528.59  cgottsacker     3/17 12:22 Error from slot1_1@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.62  cgottsacker     3/17 12:22 Error from slot1_2@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.67  cgottsacker     3/17 12:22 Error from slot1_3@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.78  cgottsacker     3/17 12:22 Error from slot1_4@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.82  cgottsacker     3/17 12:22 Error from slot1_5@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.85  cgottsacker     3/17 12:22 Error from slot1_6@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.86  cgottsacker     3/17 12:22 Error from slot1_7@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.87  cgottsacker     3/17 12:22 Error from slot1_8@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.88  cgottsacker     3/17 12:22 Error from slot1_9@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.89  cgottsacker     3/17 12:22 Error from slot1_10@e151.chtc.wisc.edu: STARTER at 128.105.24
+	82636528.90  cgottsacker     3/17 12:22 Error from slot1_11@e151.chtc.wisc.edu: STARTER at 128.105.24
+	82636528.92  cgottsacker     3/17 12:22 Error from slot1_12@e151.chtc.wisc.edu: STARTER at 128.105.24
+	82636528.94  cgottsacker     3/17 12:22 Error from slot1_2@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.95  cgottsacker     3/17 12:22 Error from slot1_3@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.96  cgottsacker     3/17 12:22 Error from slot1_6@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.97  cgottsacker     3/17 12:22 Error from slot1_7@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.98  cgottsacker     3/17 12:22 Error from slot1_8@e151.chtc.wisc.edu: STARTER at 128.105.244
+	82636528.99  cgottsacker     3/17 12:22 Error from slot1_9@e151.chtc.wisc.edu: STARTER at 128.105.244

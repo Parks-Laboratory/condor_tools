@@ -1,0 +1,7 @@
+Problem:
+	on submit server, using command "condor_q", get the message:
+		-- Failed to fetch ads from: <128.104.100.44:9618?addrs=128.104.100.44-9618+[2607-f388-107c-501-90e2-baff-fe2c-2724]-9618&noUDP&sock=11736_7f91_3> : submit-3.chtc.wisc.edu
+		SECMAN:2007:Failed to end classad message.
+
+Solution:
+	?

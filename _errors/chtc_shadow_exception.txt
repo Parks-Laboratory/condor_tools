@@ -1,0 +1,64 @@
+Error: 
+	"Failed to execute '/var/lib/condor/execute/slot1/dir_3525362/condor_exec.exe' with arguments 2: (errno=2: 'No such file or directory')
+		Code 6 Subcode 2"
+
+Cause of problem: 
+	^M Windows line endings	
+	
+Solution: 
+	edit using Unix editor or use Unix/OSx EOL marker in Notepad++
+
+
+CHTC log file: 
+	000 (65101544.000.000) 07/20 09:18:31 Job submitted from host: <128.104.100.44:9618?addrs=128.104.100.44-9618+[2607-f388-107c-501-90e2-baff-fe2c-2724]-9618&noUDP&sock=3724089_e044_4>
+	...
+	000 (65101544.001.000) 07/20 09:18:31 Job submitted from host: <128.104.100.44:9618?addrs=128.104.100.44-9618+[2607-f388-107c-501-90e2-baff-fe2c-2724]-9618&noUDP&sock=3724089_e044_4>
+	...
+	000 (65101544.002.000) 07/20 09:18:31 Job submitted from host: <128.104.100.44:9618?addrs=128.104.100.44-9618+[2607-f388-107c-501-90e2-baff-fe2c-2724]-9618&noUDP&sock=3724089_e044_4>
+	...
+	000 (65101544.003.000) 07/20 09:18:31 Job submitted from host: <128.104.100.44:9618?addrs=128.104.100.44-9618+[2607-f388-107c-501-90e2-baff-fe2c-2724]-9618&noUDP&sock=3724089_e044_4>
+	...
+	001 (65101544.002.000) 07/20 09:20:44 Job executing on host: <128.104.101.124:9618?addrs=128.104.101.124-9618+[2607-f388-107c-501-206-f6ff-fe30-a629]-9618&noUDP&sock=4446_bb68_3>
+	...
+	007 (65101544.002.000) 07/20 09:20:44 Shadow exception!
+		Error from slot1_8@e124.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_3525362/condor_exec.exe' with arguments 2: (errno=2: 'No such file or directory')
+		0  -  Run Bytes Sent By Job
+		73658832  -  Run Bytes Received By Job
+	...
+	012 (65101544.002.000) 07/20 09:20:44 Job was held.
+		Error from slot1_8@e124.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_3525362/condor_exec.exe' with arguments 2: (errno=2: 'No such file or directory')
+		Code 6 Subcode 2
+	...
+	001 (65101544.003.000) 07/20 09:20:44 Job executing on host: <128.104.101.131:9618?addrs=128.104.101.131-9618+[2607-f388-107c-501-206-f6ff-fe30-a771]-9618&noUDP&sock=3159231_0867_3>
+	...
+	007 (65101544.003.000) 07/20 09:20:44 Shadow exception!
+		Error from slot1_1@e131.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_1095909/condor_exec.exe' with arguments 3: (errno=2: 'No such file or directory')
+		0  -  Run Bytes Sent By Job
+		73658832  -  Run Bytes Received By Job
+	...
+	001 (65101544.000.000) 07/20 09:20:44 Job executing on host: <128.105.245.111:9618?addrs=128.105.245.111-9618+[--1]-9618&noUDP&sock=5327_7517_3>
+	...
+	007 (65101544.000.000) 07/20 09:20:45 Shadow exception!
+		Error from slot1_27@e311.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_2523588/condor_exec.exe' with arguments 0: (errno=2: 'No such file or directory')
+		0  -  Run Bytes Sent By Job
+		73658832  -  Run Bytes Received By Job
+	...
+	012 (65101544.003.000) 07/20 09:20:45 Job was held.
+		Error from slot1_1@e131.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_1095909/condor_exec.exe' with arguments 3: (errno=2: 'No such file or directory')
+		Code 6 Subcode 2
+	...
+	012 (65101544.000.000) 07/20 09:20:45 Job was held.
+		Error from slot1_27@e311.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_2523588/condor_exec.exe' with arguments 0: (errno=2: 'No such file or directory')
+		Code 6 Subcode 2
+	...
+	001 (65101544.001.000) 07/20 09:20:48 Job executing on host: <128.105.245.215:9618?addrs=128.105.245.215-9618+[--1]-9618&noUDP&sock=5314_8a5c_3>
+	...
+	007 (65101544.001.000) 07/20 09:20:48 Shadow exception!
+		Error from slot1_4@e415.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_2030509/condor_exec.exe' with arguments 1: (errno=2: 'No such file or directory')
+		0  -  Run Bytes Sent By Job
+		73658832  -  Run Bytes Received By Job
+	...
+	012 (65101544.001.000) 07/20 09:20:48 Job was held.
+		Error from slot1_4@e415.chtc.wisc.edu: Failed to execute '/var/lib/condor/execute/slot1/dir_2030509/condor_exec.exe' with arguments 1: (errno=2: 'No such file or directory')
+		Code 6 Subcode 2
+	...

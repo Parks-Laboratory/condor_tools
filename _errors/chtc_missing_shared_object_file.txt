@@ -1,0 +1,37 @@
+Problem:
+	Running epistasis script on CHTC pools alone works just fine, but
+	OSG and UW-campus pools are unable to find a dependency.
+
+Cause of problem:
+	ATLAS library not indstalled on all nodes of OSG, UW-campus
+
+Solution:
+	Submit an interactive job, copy the entire ATLAS directory
+	(located at /usr/lib64/atlas/) to the home directory so that it will
+	be copied back to the submit server when you exit the job.
+
+	Include the atlas directory in the list of files to be transferred
+	export LD_LIBRARY_PATH=$(pwd)/atlas
+
+Error:
+	ImportError: libcblas.so.3: cannot open shared object file: No such file or directory
+
+Python traceback:
+	/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
+	  warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
+	Traceback (most recent call last):
+	  File "epistasis_node.py", line 14, in <module>
+	    from fastlmm.association import epistasis
+	  File "/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/fastlmm/association/__init__.py", line 6, in <module>
+	    from fastlmm.association.heritability_spatial_correction import heritability_spatial_correction
+	  File "/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/fastlmm/association/heritability_spatial_correction.py", line 16, in <module>
+	    import sklearn.metrics
+	  File "/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/sklearn/metrics/__init__.py", line 33, in <module>
+	    from . import cluster
+	  File "/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/sklearn/metrics/cluster/__init__.py", line 19, in <module>
+	    from .unsupervised import silhouette_samples
+	  File "/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/sklearn/metrics/cluster/unsupervised.py", line 10, in <module>
+	    from ..pairwise import pairwise_distances
+	  File "/wntmp/condor/execute/dir_1410318/glide_a5iKks/execute/dir_2129200/python/lib/python2.7/site-packages/sklearn/metrics/pairwise.py", line 29, in <module>
+	    from .pairwise_fast import _chi2_kernel_fast, _sparse_manhattan
+	ImportError: libcblas.so.3: cannot open shared object file: No such file or directory
