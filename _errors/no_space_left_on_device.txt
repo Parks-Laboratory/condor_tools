@@ -1,0 +1,18 @@
+Problem:
+	Node does not have enough memory
+
+Solution:
+	just re-submit?
+	have node executable script tell Condor to restart job?
+
+.err file:
+	tar: python/lib/python2.7/site-packages/matplotlib/dates.pyc: Cannot open: No such file or directory
+	tar: python/lib/python2.7/site-packages/matplotlib/externals/six.pyc: Wrote only 1024 of 2514 bytes
+	tar: python/lib/python2.7/site-packages/matplotlib/externals/__init__.py: Cannot write: No space left on device
+	tar: python/lib/python2.7/site-packages/matplotlib/externals/six.py: Cannot write: No space left on device
+	tar: python/lib/python2.7/site-packages/matplotlib/textpath.py: Cannot write: No space left on device
+	tar: python/lib/python2.7/site-packages/matplotlib/backends/backend_svg.py: Wrote only 2560 of 10240 bytes
+	tar: python/lib/python2.7/site-packages/matplotlib/backends/backend_wx.py: Cannot write: No space left on device
+	tar: python/lib/python2.7/site-packages/matplotlib/backends/backend_gtk.pyc: Cannot write: No space left on device
+	tar: python/lib/python2.7/site-packages/matplotlib/backends/backend_pdf.pyc: Cannot write: No space left on device
+	tar: python/lib/python2.7/site-packages/matplotlib/backends/backend_wxagg.pyc: Cannot write: No space left on device
