@@ -6,6 +6,21 @@
 #
 # Given 2 versions of a directory (dir), backup the current version of dir
 # and replace the contents of dir with contents of the other version.
+#
+# Example:
+# Suppose version1="FOO" and version2="BAR", and dir="DIR"
+#
+# Initially, before running the script:
+# DIR contains version 1
+# DIR_BAR contains version 2
+#
+# After running the script for the first time:
+# DIR contains version 2
+# DIR_FOO contains version 1
+#
+# After running the script again, we're back to the initial state:
+# DIR contains version 1
+# DIR_BAR contains version 2
 
 
 dir="data"						# set this to name of main directory
