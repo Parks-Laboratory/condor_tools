@@ -10,7 +10,7 @@
 # Example:
 # Suppose version1="FOO" and version2="BAR", and dir="DIR"
 #
-# Initially, before running the script:
+# Suppose that initially, before running the script:
 # DIR contains version 1
 # DIR_BAR contains version 2
 #
@@ -21,6 +21,8 @@
 # After running the script again, we're back to the initial state:
 # DIR contains version 1
 # DIR_BAR contains version 2
+#
+# Note: the script will exit if DIR_BAR and DIR_FOO exist when it is run.
 
 
 dir="data"						# set this to name of main directory
