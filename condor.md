@@ -13,6 +13,7 @@ General information about interacting with Condor
 		Restart all jobs for $USER that were put on hold
 	condor_rm [<job #> | $USER]
 		if $USER is specified instead of job#, all jobs submitted by user are removed
+	condor_ssh_to_job <Cluster.ProcId>
 	condor_submit <submit file>.sub
 	codor_submit -i <interactive submit file>.sub
 
@@ -66,12 +67,12 @@ General information about interacting with Condor
 	008: (not used)
 	009: Job aborted
 	010: Job was suspended (execution on node paused)
-	011: Job was unsuspended
-	012: Job was held
+	011: Job was unsuspended (execution resumed on node)
+	012: Job was held (job was stopped and returned to queue)
 		012 (82567314.3993.000) 03/09 12:52:49 Job was held.
 			Error from slot1_8@spalding10.chtc.wisc.edu: STARTER at 128.104.58.19 failed to receive file /var/lib/condor/execute/slot1/dir_2198784/epistasis.tar.gz: FILETRANSFER:1:non-zero exit(13312) from /usr/libexec/condor/curl_plugin
 			Code 12 Subcode 0
-	013: Job was released (request held job be re-run)
+	013: Job was released (job that was held is re-run)
 		013 (82645550.9605.000) 03/18 06:42:19 Job was released.
 		The job attribute PeriodicRelease expression '(CurrentTime - EnteredCurrentStatus > 600)' evaluated to TRUE
 

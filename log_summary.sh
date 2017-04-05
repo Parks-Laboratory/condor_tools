@@ -10,16 +10,25 @@ function printds {
 }
 
 function countJobs {
-	echo $(cat $1 | grep ^$2 | wc -l)
+	echo $(grep ^"$2" $1 | wc -l)
 }
+
+printds \\n===============================================
 
 echo 'Number jobs completed/submitted:' $(countJobs $1 005) / $(countJobs $1 000)
 echo 'Number jobs put on hold/re-submitted:' $(countJobs $1 012) / $(countJobs $1 013)
 echo 'Number jobs evicted:' $(countJobs $1 004)
+echo 'Number jobs w/ non-zero exit codes:' $(countJobs $1 "Normal termination (return value -*[1-9]")
+
+
+if [ ! -x "$(command -v Rscript)" ]; then
+	echo -e "\\n(Additional statistics available if Rscript is installed)"
+	printds \\n===============================================
+	exit
+fi
 
 echo 'args=commandArgs(trailingOnly = TRUE);
-	summary(scan(args[1])/as.numeric(args[2]))' > summarize.R
-
+summary(scan(args[1])/as.numeric(args[2]))' > summarize.R
 printds \\n===============================================
 
 grep 'Disk (KB)' $1 > lines

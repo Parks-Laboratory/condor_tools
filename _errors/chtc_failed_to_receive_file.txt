@@ -3,6 +3,11 @@ Problem:
 	but some nodes fails to receive them. A node always fails to receive a file
 	when several jobs are submitted to the node at the same time.
 
+Note:
+	When using SQUID to transfer large files, SQUID may not immediately detect
+	that the file has been changed, so its cache might contain a stale version
+	of the file.
+
 Solution:
 	Enable re-submission of held jobs by adding the following line to .sub file:
 		periodic_release = (CurrentTime - EnteredCurrentStatus > 600)
