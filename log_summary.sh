@@ -53,6 +53,16 @@ Rscript summarize.R col 1
 
 printds \\n===============================================
 
+firstSubmission=$( grep ^000 "$1" | head -1 | awk '{print $3" "$4}' )
+lastTermination=$( grep ^005 "$1" | tail -1 | awk '{print $3" "$4}' )
+echo "First job submitted on $firstSubmission"
+echo "Last job finished on $lastTermination"
+echo 'args=commandArgs(trailingOnly = TRUE); s=strptime(c(args[1], args[2]), format="%m/%d  %H:%M:%S");s[2]-s[1];' > getDuration.R
+echo
+Rscript getDuration.R "$firstSubmission" "$lastTermination"
+
+printds \\n===============================================
+
 echo 'Job duration (ignore dates)'
 grep 'Total Remote Usage' $1 > lines
 awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
@@ -65,5 +75,4 @@ printds \\n===============================================
 
 
 
-
-rm lines col summarize.R summarizeTime.R
+rm lines col summarize.R getDuration.R summarizeTime.R
