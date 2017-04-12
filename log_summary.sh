@@ -10,15 +10,15 @@ function printds {
 }
 
 function countJobs {
-	echo $(grep ^"$2" $1 | wc -l)
+	echo $(grep "$1" "$2" | wc -l)
 }
 
 printds \\n===============================================
 
-echo 'Number jobs completed/submitted:' $(countJobs $1 005) / $(countJobs $1 000)
-echo 'Number jobs put on hold/re-submitted:' $(countJobs $1 012) / $(countJobs $1 013)
-echo 'Number jobs evicted:' $(countJobs $1 004)
-echo 'Number jobs w/ non-zero exit codes:' $(countJobs $1 "Normal termination (return value -*[1-9]")
+echo 'Number jobs completed/submitted:' $(countJobs ^005 "$1") / $(countJobs ^000 "$1")
+echo 'Number jobs put on hold/re-submitted:' $(countJobs ^012 "$1") / $(countJobs ^013 "$1")
+echo 'Number jobs evicted:' $(countJobs ^004 "$1")
+echo 'Number jobs w/ non-zero exit codes:' $(countJobs "Normal termination (return value [^0]" "$1")
 
 
 if [ ! -x "$(command -v Rscript)" ]; then
@@ -31,7 +31,7 @@ echo 'args=commandArgs(trailingOnly = TRUE);
 summary(scan(args[1])/as.numeric(args[2]))' > summarize.R
 printds \\n===============================================
 
-grep 'Disk (KB)' $1 > lines
+grep 'Disk (KB)' "$1" > lines
 echo "Disk Usage (MB):"
 awk '{print $4}' lines > col
 Rscript summarize.R col 1000
@@ -42,7 +42,7 @@ Rscript summarize.R col 1000
 
 printds \\n===============================================
 
-grep 'Memory (MB)' $1 > lines
+grep 'Memory (MB)' "$1" > lines
 echo "Memory Usage (MB):"
 awk '{print $4}' lines > col
 Rscript summarize.R col 1
@@ -64,7 +64,7 @@ Rscript getDuration.R "$firstSubmission" "$lastTermination"
 printds \\n===============================================
 
 echo 'Job duration (ignore dates)'
-grep 'Total Remote Usage' $1 > lines
+grep 'Total Remote Usage' "$1" > lines
 awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
 echo 'args=commandArgs(trailingOnly = TRUE); summary(strptime(scan(args[1],
 	what="character"), format="%H:%M:%S"))' > summarizeTime.R
