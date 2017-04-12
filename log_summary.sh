@@ -27,8 +27,11 @@ if [ ! -x "$(command -v Rscript)" ]; then
 	exit
 fi
 
-echo 'args=commandArgs(trailingOnly = TRUE);
-summary(scan(args[1])/as.numeric(args[2]))' > summarize.R
+echo '
+args=commandArgs(trailingOnly = TRUE);
+summary(scan(args[1])/as.numeric(args[2]))
+' > summarize.R
+
 printds \\n===============================================
 
 grep 'Disk (KB)' "$1" > lines
@@ -57,22 +60,40 @@ firstSubmission=$( grep ^000 "$1" | head -1 | awk '{print $3" "$4}' )
 lastTermination=$( grep ^005 "$1" | tail -1 | awk '{print $3" "$4}' )
 echo "First job submitted on $firstSubmission"
 echo "Last job finished on $lastTermination"
-echo 'args=commandArgs(trailingOnly = TRUE); s=strptime(c(args[1], args[2]), format="%m/%d  %H:%M:%S");s[2]-s[1];' > getDuration.R
+
+echo '
+args=commandArgs(trailingOnly = TRUE);
+s=strptime(c(args[1], args[2]), format="%m/%d  %H:%M:%S");
+s[2]-s[1];
+' > getDuration.R
+
 echo
 Rscript getDuration.R "$firstSubmission" "$lastTermination"
 
 printds \\n===============================================
 
-echo 'Job duration (ignore dates)'
+
+echo 'Job duration (successful runs only, ignore dates)'
 grep 'Total Remote Usage' "$1" > lines
 awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
-echo 'args=commandArgs(trailingOnly = TRUE); summary(strptime(scan(args[1],
-	what="character"), format="%H:%M:%S"))' > summarizeTime.R
+
+echo '
+args=commandArgs(trailingOnly = TRUE);
+summary(strptime(scan(args[1], what="character"), format="%H:%M:%S"))
+' > summarizeTime.R
+
 Rscript summarizeTime.R col
+
+# echo 'Total time executing (i.e. total time spent executing)'
+# grep 'Run Remote Usage' "$1" > lines
+# awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
+# echo 'args=commandArgs(trailingOnly = TRUE); sum(strptime(scan(args[1],
+# what="character"), format="%H:%M:%S"))' > runtime.R
+# Rscript runtime.R col
 
 printds \\n===============================================
 
 
 
 
-rm lines col summarize.R getDuration.R summarizeTime.R
+# rm lines col summarize.R getDuration.R summarizeTime.R runtime.R
