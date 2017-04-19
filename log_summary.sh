@@ -3,6 +3,9 @@
 if [ $# -ne 1 ]; then
 	echo Usage: $0 path/to/chtc/log_file
 	exit
+elif [ ! -f $1 ]; then
+	echo Could not find file \"$1\"
+	exit
 fi
 
 function printds {
@@ -29,7 +32,7 @@ fi
 
 echo '
 args=commandArgs(trailingOnly = TRUE);
-summary(scan(args[1])/as.numeric(args[2]))
+summary(scan(args[1], quiet=TRUE)/as.numeric(args[2]))
 ' > summarize.R
 
 printds \\n===============================================
@@ -70,6 +73,27 @@ s[2]-s[1];
 echo
 Rscript getDuration.R "$firstSubmission" "$lastTermination"
 
+grep 'Run Remote Usage' "$1" > lines
+awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
+echo '
+args=commandArgs(trailingOnly = TRUE);
+t=strptime(scan(args[1],
+what="character", quiet=TRUE), format="%H:%M:%S");
+s=sum(c(t$hour*3600, t$min*60, t$sec));
+if(s < 60) {
+	cat(paste(s,"secs"));
+} else if(s < 3600) {
+	cat(paste(s/60,"mins"));
+} else if(s < 3600*24) {
+	cat(paste(s/3600,"hours"));
+} else if(s < s/(3600*24*365)){
+	cat(paste(s/(3600*24),"days"));
+} else {
+	cat(paste(s/(3600*24*365),"years"));
+}
+' > runtime.R
+echo "Total time executing: $(Rscript runtime.R col)"
+
 printds \\n===============================================
 
 
@@ -79,21 +103,15 @@ awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
 
 echo '
 args=commandArgs(trailingOnly = TRUE);
-summary(strptime(scan(args[1], what="character"), format="%H:%M:%S"))
+summary(strptime(scan(args[1], what="character", quiet=TRUE), format="%H:%M:%S"))
 ' > summarizeTime.R
 
 Rscript summarizeTime.R col
 
-# echo 'Total time executing (i.e. total time spent executing)'
-# grep 'Run Remote Usage' "$1" > lines
-# awk 'match($3, /([^,]*)/, a) {print a[1]}' lines > col
-# echo 'args=commandArgs(trailingOnly = TRUE); sum(strptime(scan(args[1],
-# what="character"), format="%H:%M:%S"))' > runtime.R
-# Rscript runtime.R col
 
 printds \\n===============================================
 
 
 
 
-# rm lines col summarize.R getDuration.R summarizeTime.R runtime.R
+rm lines col summarize.R getDuration.R summarizeTime.R runtime.R
