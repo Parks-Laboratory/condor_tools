@@ -21,3 +21,5 @@ function from_chtc {
                 scp -r $user@submit-3.chtc.wisc.edu:$i .
         done
 }
+
+alias chtc='ssh $user@submit-3.chtc.wisc.edu'
