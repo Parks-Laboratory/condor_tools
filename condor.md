@@ -18,7 +18,10 @@ General information about interacting with Condor
 	codor_submit -i <interactive submit file>.sub
 
 ## Condor log files codes:
-	(see http://research.cs.wisc.edu/htcondor/manual/v7.6.2/2_6Managing_Job.html#SECTION00363000000000000000)
+(see http://research.cs.wisc.edu/htcondor/manual/v7.6.2/2_6Managing_Job.html#SECTION00363000000000000000)
+
+Use [log_summary.sh](log_summary.sh) with log file to display statistics such as running time, RAM usage, and number of evictions/holds.
+
 	000: Job submitted
 		000 (82549230.000.000) 03/03 15:12:32 Job submitted from host: <128.104.100.44:9618?addrs=128.104.100.44-9618+[2607-f388-107c-501-90e2-baff-fe2c-2724]-9618&noUDP&sock=4629_affc_3>
 	001: Job executing
