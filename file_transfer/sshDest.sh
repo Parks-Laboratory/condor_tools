@@ -1,5 +1,9 @@
+if [ ! -d ".ssh" ]; then
+	mkdir .ssh
+fi
+
 echo UPDATE LIST OF AUTHORIZED KEYS
-cat id_rsa.pub >> ~/.ssh/authorized_keys
+cat id_rsa.pub >> ~/.ssh/authorized_keys && rm -f id_rsa.pub $0
 
 echo MODIFY FILE PERMISSIONS
 chmod 0700 ~
