@@ -30,33 +30,6 @@ if [ ! -x "$(command -v Rscript)" ]; then
 	exit
 fi
 
-echo '
-args=commandArgs(trailingOnly = TRUE);
-summary(scan(args[1], quiet=TRUE)/as.numeric(args[2]))
-' > summarize.R
-
-printds \\n===============================================
-
-grep 'Disk (KB)' "$1" > lines
-echo "Disk Usage (MB):"
-awk '{print $4}' lines > col
-Rscript summarize.R col 1000
-echo
-echo "Disk Allocation (MB):"
-awk '{print $6}' lines > col
-Rscript summarize.R col 1000
-
-printds \\n===============================================
-
-grep 'Memory (MB)' "$1" > lines
-echo "Memory Usage (MB):"
-awk '{print $4}' lines > col
-Rscript summarize.R col 1
-echo
-echo "Memory Allocation (MB):"
-awk '{print $6}' lines > col
-Rscript summarize.R col 1
-
 printds \\n===============================================
 
 firstSubmission=$( grep ^000 "$1" | head -1 | awk '{print $3" "$4}' )
@@ -111,6 +84,32 @@ Rscript summarizeTime.R col
 
 printds \\n===============================================
 
+echo '
+args=commandArgs(trailingOnly = TRUE);
+summary(scan(args[1], quiet=TRUE)/as.numeric(args[2]))
+' > summarize.R
+
+grep 'Disk (KB)' "$1" > lines
+echo "Disk Usage (MB):"
+awk '{print $4}' lines > col
+Rscript summarize.R col 1000
+echo
+echo "Disk Allocation (MB):"
+awk '{print $6}' lines > col
+Rscript summarize.R col 1000
+
+printds \\n===============================================
+
+grep 'Memory (MB)' "$1" > lines
+echo "Memory Usage (MB):"
+awk '{print $4}' lines > col
+Rscript summarize.R col 1
+echo
+echo "Memory Allocation (MB):"
+awk '{print $6}' lines > col
+Rscript summarize.R col 1
+
+printds \\n===============================================
 
 
 
