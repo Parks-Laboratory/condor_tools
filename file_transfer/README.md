@@ -1,7 +1,7 @@
 # Description of files
 ## Misc.
 * **.bashrc** contains fromchtc and tochtc functions that can be run in bash to facilitate file transfer to CHTC submit server. 
-	* Add the contents of this file to your ~/.bashrc file:
+	* Add the contents of this file to your ~/.bashrc file to use these commands from the bash command line:
 		1. vim ~/.bashrc
 		1. enter text-editing mode: type `I`
 		1. paste the contents of this *.bashrc* into the top of the file (right-click > paste, or Shift + Insert)
