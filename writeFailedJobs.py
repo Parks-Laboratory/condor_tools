@@ -33,12 +33,16 @@ def getMissingValues(sequence, begin, end):
 
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser()
+	parser = argparse.ArgumentParser(description='''
+	Find the missing files in a directory containing sequentially-numbered files.
+	The "pattern" argument is used to extract the number from the filename, and the
+	"end" argument tells the script the number of the last file to expect.
+	''')
 
 	parser.add_argument('end', type=int, help='the highest number in sequence (inclusive)')
 	parser.add_argument('-b', '--begin', type=int, default=0, help='the lowest number in sequence (inclusive)')
 	parser.add_argument('-p', '--pattern', default='\d+',
-		help='e.g. use "(?<=MALE_FAT_MASS_0wks_LOG_)\d+(?=.gwas)" \
+		help='e.g. use (in quotes) "(?<=MALE_FAT_MASS_0wks_LOG_)\d+(?=.gwas)" \
 		for files like MALE_FAT_MASS_0wks_LOG_8694.gwas')
 	parser.add_argument('--path', default='.', help='directory containing files')
 
@@ -48,8 +52,12 @@ if __name__ == '__main__':
 	sequence = queue.PriorityQueue()
 	for file in os.listdir(args.path):
 		match = re.search(args.pattern, file)
-		if match:
-			sequence.put(int(match.group(0)))
+		if match and match.group(0):
+			try:
+				sequence.put(int(match.group(0)))
+			except ValueError:
+				print('Non-numeric value "' + match.group(0) + '" encountered in filenames. Try a different pattern.')
+				sys.exit()
 
 	with open('failed.txt', 'w') as f:
 		for val in getMissingValues(sequence, args.begin, args.end):
