@@ -41,8 +41,8 @@ if __name__ == '__main__':
 
 	parser.add_argument('end', type=int, help='the highest number in sequence (inclusive)')
 	parser.add_argument('-b', '--begin', type=int, default=0, help='the lowest number in sequence (inclusive)')
-	parser.add_argument('-p', '--pattern', default='\d+',
-		help='e.g. use (in quotes) "(?<=MALE_FAT_MASS_0wks_LOG_)\d+(?=.gwas)" \
+	parser.add_argument('-p', '--pattern', default='.*[^\d](\d+).*',
+		help='e.g. use (in quotes) ".*_(\d+).*"(default) or "(?<=MALE_FAT_MASS_0wks_LOG_)\d+(?=.gwas)" \
 		for files like MALE_FAT_MASS_0wks_LOG_8694.gwas')
 	parser.add_argument('--path', default='.', help='directory containing files')
 
@@ -52,12 +52,14 @@ if __name__ == '__main__':
 	sequence = queue.PriorityQueue()
 	for file in os.listdir(args.path):
 		match = re.search(args.pattern, file)
-		if match and match.group(0):
+		# ignore files that don't match the pattern
+		if match:
 			try:
-				sequence.put(int(match.group(0)))
+				sequence.put(int(match.group(1)))
 			except ValueError:
-				print('Non-numeric value "' + match.group(0) + '" encountered in filenames. Try a different pattern.')
+				print('Non-numeric value "' + match.group(1) + '" encountered in filenames. Try a different pattern.')
 				sys.exit()
+
 
 	with open('failed.txt', 'w') as f:
 		for val in getMissingValues(sequence, args.begin, args.end):
