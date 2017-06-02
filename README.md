@@ -1,7 +1,7 @@
 # Purpose
 Tools for making portable installations, monitoring jobs, and in general interacting with CHTC condor. See [**general information for interacting with Condor**](condor.md)
 
-## Description of scripts
+## Tools
 * *log_summary.sh* reads the .log file output by Condor and displays statistics on the jobs
   <details><summary>Sample output</summary><pre>
   ===============================================
@@ -49,3 +49,23 @@ Tools for making portable installations, monitoring jobs, and in general interac
 
   ===============================================
   </pre></details>
+  
+* *writeFailedJobs.py* 
+usage: writeFailedJobs.py [-h] [-b BEGIN] [-p PATTERN] [--path PATH] end
+
+Find the missing files in a directory containing sequentially-numbered files.
+The "pattern" argument is used to extract the number from the filename, and
+the "end" argument tells the script the number of the last file to expect.
+
+positional arguments:
+  end                   the highest number in sequence (inclusive)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BEGIN, --begin BEGIN
+                        the lowest number in sequence (inclusive)
+  -p PATTERN, --pattern PATTERN
+                        e.g. use (in quotes)
+                        "(?<=MALE_FAT_MASS_0wks_LOG_)\d+(?=.gwas)" for files
+                        like MALE_FAT_MASS_0wks_LOG_8694.gwas
+  --path PATH           directory containing files
