@@ -3,7 +3,7 @@ Tools for making portable installations, monitoring jobs, and in general interac
 
 ## Tools
 * *writeFailedJobs.py*  
-  e.g. `python writeFailedJobs.py 9834`, where jobs are numbered 0 to 9834, and there are 9835 total jobs
+  Usage: `python writeFailedJobs.py 9834`, where jobs are numbered 0 to 9834, and there are 9835 total jobs
   ```
   usage: writeFailedJobs.py [-h] [-b BEGIN] [-p PATTERN] [--path PATH] end
 
