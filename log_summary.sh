@@ -65,7 +65,7 @@ if(s < 60) {
 	cat(paste(s/(3600*24*365),"years"));
 }
 ' > runtime.R
-echo "Total time executing: $(Rscript runtime.R col)"
+echo "Total time it would take to execute all jobs in sequence: $(Rscript runtime.R col)"
 
 printds \\n===============================================
 
