@@ -42,7 +42,7 @@ if __name__ == '__main__':
 	parser.add_argument('end', type=int, help='the highest number in sequence (inclusive)')
 	parser.add_argument('-b', '--begin', type=int, default=0, help='the lowest number in sequence (inclusive)')
 	parser.add_argument('-p', '--pattern', default='.*[^\d](\d+).*',
-		help='e.g. use (in quotes) ".*_(\d+).*"(default) or "(?<=MALE_FAT_MASS_0wks_LOG_)\d+(?=.gwas)" \
+		help='e.g. use (in quotes) ".*_(\d+).*"(default) or "(?<=MALE_FAT_MASS_0wks_LOG_)(\d+)(?=.gwas)" \
 		for files like MALE_FAT_MASS_0wks_LOG_8694.gwas')
 	parser.add_argument('--path', default='.', help='directory containing files')
 
